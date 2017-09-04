@@ -42,7 +42,13 @@ const tilesData = [
     title: 'Water plant',
     author: 'BkrmadtyaKarki',
   },
-];
+]
+
+const categories = [
+  "Currently Reading",
+  "Waiting To Read",
+  "Read"
+]
 
 class Bookshelf extends Component {
   render() {
@@ -51,14 +57,17 @@ class Bookshelf extends Component {
         <Shelf
           title="Currently Reading"
           data={tilesData}
+          categories={categories}
         />
         <Shelf
           title="Waiting to Read"
           data={tilesData}
+          categories={categories}
         />
         <Shelf
           title="Read"
           data={tilesData}
+          categories={categories}
         />
       </div>
     );
