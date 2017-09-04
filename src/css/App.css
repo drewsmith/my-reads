@@ -1,0 +1,17 @@
+body {
+  background: #ececec;
+}
+
+.header {
+  background: #0074D9 !important;
+}
+
+.card-container {
+  margin: 20px;
+}
+
+.book-grid-list {
+  display: 'flex';
+  flex-wrap: 'nowrap';
+  overflow-x: 'auto';
+}
