@@ -28,13 +28,13 @@ const styles = {
   },
   searchIcon: {
     position: 'absolute',
-		left: 10,
+		left: 20,
 		top: 20,
 		fontSize: '40px'
   },
   searchInput: {
     width: '100%',
-		textIndent: '50px',
+		textIndent: '60px',
 		fontSize: '20px',
     height: '60px',
     paddingBottom: '10px'
