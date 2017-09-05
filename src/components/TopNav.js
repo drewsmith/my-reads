@@ -3,18 +3,29 @@ import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import { white, blueGrey900 } from 'material-ui/styles/colors'
+import { Link } from 'react-router-dom'
 
 const styles = {
-  bookmark: {
-    paddingRight: '10px'
+  appBar: {
+    background: blueGrey900
+  },
+  searchButton: {
+    color: white,
+    marginTop: '6px'
   }
 }
 
-const Title = () => {
+const Title = () => <div>My Reads</div>
+
+const SearchButton = () => {
   return (
-    <div>
-      My Reads
-    </div>
+    <Link to="/search">
+      <FlatButton
+        label="Search"
+        icon={<SearchIcon />}
+        style={styles.searchButton}
+      />
+    </Link>
   )
 }
 
@@ -23,16 +34,9 @@ class TopNav extends Component {
     return (
       <AppBar
         title={<Title />}
-        style={{
-          background: blueGrey900
-        }}
+        style={styles.appBar}
         showMenuIconButton={false}
-        iconElementRight={
-          <FlatButton
-            label="Search"
-            icon={<SearchIcon />}
-          />
-        }
+        iconElementRight={<SearchButton />}
       />
     )
   }
