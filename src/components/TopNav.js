@@ -15,8 +15,6 @@ const styles = {
   }
 }
 
-const Title = () => <div>My Reads</div>
-
 const SearchButton = () => {
   return (
     <Link to="/search">
@@ -33,7 +31,7 @@ class TopNav extends Component {
   render() {
     return (
       <AppBar
-        title={<Title />}
+        title="My Reads"
         style={styles.appBar}
         showMenuIconButton={false}
         iconElementRight={<SearchButton />}

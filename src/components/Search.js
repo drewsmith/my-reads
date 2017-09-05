@@ -14,7 +14,8 @@ import { white, blueGrey900 } from 'material-ui/styles/colors'
 const styles = {
   backIcon: {
     color: white,
-    padding: '12px'
+    padding: '12px',
+    cursor: 'pointer'
   },
   appBar: {
     background: blueGrey900
@@ -30,7 +31,7 @@ const styles = {
     position: 'absolute',
 		left: 20,
 		top: 20,
-		fontSize: '40px'
+    fontSize: '40px'
   },
   searchInput: {
     width: '100%',
@@ -46,16 +47,17 @@ const styles = {
 
 const SearchContainer = ({children}) => <div style={styles.searchContainer}>{children}</div>
 
-const BackIcon = () => <KeyboardBackspace style={styles.backIcon} />
+const BackIcon = (history) => (
+  <Link to="/">
+    <KeyboardBackspace style={styles.backIcon} />
+  </Link>
+)
 
-const Nav = ({history}) => {
+const Nav = () => {
   return (
     <AppBar 
       title="Search"
       iconElementLeft={<BackIcon />}
-      onLeftIconButtonTouchTap={() => {
-        history.goBack();
-      }}
       style={styles.appBar}
     />
   )
