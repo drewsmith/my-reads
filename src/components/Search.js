@@ -30,8 +30,7 @@ const styles = {
     overflow: 'hidden',
     position: 'relative',
     width: '100%',
-    paddingTop: '0',
-    background: white
+    paddingTop: '0'
   },
   searchIcon: {
     position: 'absolute',
@@ -108,10 +107,10 @@ class Search extends Component {
       query: query
     })
     search(query, 10).then(searchResults => {
+      let results = searchResults.error ? [] : searchResults
       this.setState({
-        searchResults: searchResults,
-        loading: false,
-        query: ''
+        searchResults: results,
+        loading: false
       })
     })
   }
@@ -146,7 +145,7 @@ class Search extends Component {
             ))}
           </div>
         )}
-        {searchResults.length == 0 && query.length > 0 && (
+        {searchResults.length === 0 && query.length > 0 && loading === false && (
           <NoResults />
         )}
       </div>
