@@ -7,7 +7,8 @@ import MenuItem from 'material-ui/MenuItem'
 const styles = {
   bookCard: {
     margin: '10px',
-    minWidth: '250px'
+    minWidth: '250px',
+    maxWidth: '250px'
   },
   cardMedia: {
     maxHeight: '250px', 
@@ -34,7 +35,7 @@ class Book extends Component {
     return (
       <Card key={bookData.image} style={styles.bookCard}>
         <CardMedia style={styles.cardMedia}>
-          <img src="images/drew_marathon.jpg" alt="" />
+          <img src={bookData.img} alt="" />
         </CardMedia>
         <CardTitle title="Card title" subtitle="Card subtitle" />
         <CardText>

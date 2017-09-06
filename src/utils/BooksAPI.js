@@ -40,3 +40,11 @@ export const search = (query, maxResults) =>
     body: JSON.stringify({ query, maxResults })
   }).then(res => res.json())
     .then(data => data.books)
+
+export const mapBook = (bookData) => {
+  return {
+    id: bookData.id,
+    title: bookData.title,
+    img: bookData.imageLinks.thumbnail
+  }
+}

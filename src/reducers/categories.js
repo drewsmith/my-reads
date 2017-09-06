@@ -8,12 +8,13 @@ const initialState = [{
 
 const categories = (state = initialState, action) => {
   switch (action.type) {
+    
     case actions.ADD_TO_CATEGORY:
       let { currentlyReading } = this.state
       return [
         ...state,
         {
-          currentlyReading: currentlyReading.push(action.bookId)
+          [action.category]: [action.category].push(action.bookId)
         }
       ]
 
