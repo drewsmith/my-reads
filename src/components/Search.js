@@ -56,11 +56,22 @@ const styles = {
   },
   loading: {
     width: '100%',
-    paddingTop: '40px',
+    padding: '40px',
     margin: '0 auto',
     textAlign: 'center'
+  },
+  noResults: {
+    margin: '20px',
+    padding: '20px',
+    fontSize: '16px',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    color: blueGrey900,
+    fontWeight: '100'
   }
 }
+
+const NoResults = () => <Paper style={styles.noResults}>No results found</Paper>
 
 const Loading = () => <div style={styles.loading}><CircularProgress /></div>
 
@@ -93,12 +104,14 @@ class Search extends Component {
   onSearch = (query) => {
     this.setState({
       searchResults: [],
-      loading: true
+      loading: true,
+      query: query
     })
     search(query, 10).then(searchResults => {
       this.setState({
         searchResults: searchResults,
-        loading: false
+        loading: false,
+        query: ''
       })
     })
   }
@@ -122,15 +135,20 @@ class Search extends Component {
         {loading === true && (
           <Loading />
         )}
-        <div style={styles.searchResults}>
-          {searchResults.map(searchResult => (
-            <Book 
-              key={searchResult.id}
-              bookData={mapBook(searchResult)}
-              categories={["Currently Reading", "Want to Read", "Read"]}
-            />
-          ))}
-        </div>
+        {searchResults.length > 0 && (
+          <div style={styles.searchResults}>
+            {searchResults.map(searchResult => (
+              <Book 
+                key={searchResult.id}
+                bookData={mapBook(searchResult)}
+                categories={["Currently Reading", "Want to Read", "Read"]}
+              />
+            ))}
+          </div>
+        )}
+        {searchResults.length == 0 && query.length > 0 && (
+          <NoResults />
+        )}
       </div>
     )
   }

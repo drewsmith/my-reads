@@ -41,10 +41,15 @@ export const search = (query, maxResults) =>
   }).then(res => res.json())
     .then(data => data.books)
 
+const authors = (authors = []) => {
+  return authors.join(', ') || ''
+}
+
 export const mapBook = (bookData) => {
   return {
     id: bookData.id,
     title: bookData.title,
-    img: bookData.imageLinks.thumbnail
+    img: bookData.imageLinks.thumbnail,
+    authors: authors(bookData.authors)
   }
 }

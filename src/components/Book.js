@@ -33,11 +33,11 @@ class Book extends Component {
     let { dropDownValue, handleChange } = this.state
 
     return (
-      <Card key={bookData.image} style={styles.bookCard}>
+      <Card key={bookData.id} style={styles.bookCard}>
         <CardMedia style={styles.cardMedia}>
           <img src={bookData.img} alt="" />
         </CardMedia>
-        <CardTitle title="Card title" subtitle="Card subtitle" />
+        <CardTitle title={bookData.title} subtitle={bookData.authors} />
         <CardText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
