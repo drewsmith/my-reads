@@ -39,6 +39,13 @@ class Book extends Component {
 
   toggleDescription = (viewDescription) => this.setState({viewDescription})
 
+  componentWillMount() {
+    let { shelf } = this.props.bookData
+    this.setState({
+      dropDownValue: CATEGORIES.map(category => category.shelf).indexOf(shelf) + 1
+    })
+  }
+
   render() {
     let { bookData } = this.props
     let { dropDownValue, viewDescription } = this.state
