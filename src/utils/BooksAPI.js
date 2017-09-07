@@ -45,11 +45,15 @@ const authors = (authors = []) => {
   return authors.join(', ') || ''
 }
 
-export const mapBook = (bookData) => {
-  return {
+export const mapBook = (bookData) => ({
     id: bookData.id,
     title: bookData.title,
     img: bookData.imageLinks.thumbnail,
-    authors: authors(bookData.authors)
-  }
-}
+    authors: authors(bookData.authors),
+    shelf: bookData.shelf || '',
+    description: bookData.description || ''
+})
+
+export const trimDescription = (description) => (
+  `${description.split(" ").slice(0, 10).reduce((prev, next) => `${prev} ${next}`)}...`
+)

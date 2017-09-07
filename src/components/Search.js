@@ -48,7 +48,9 @@ const styles = {
   searchResults: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   hint: {
     paddingBottom: '15px'
@@ -140,7 +142,6 @@ class Search extends Component {
               <Book 
                 key={searchResult.id}
                 bookData={mapBook(searchResult)}
-                categories={["Currently Reading", "Want to Read", "Read"]}
               />
             ))}
           </div>

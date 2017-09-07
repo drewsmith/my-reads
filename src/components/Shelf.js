@@ -30,12 +30,11 @@ const styles = {
 class Shelf extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired
   }
 
   render() {
-    let { title, data, categories } = this.props
+    let { title, data } = this.props
     return (
       <Card style={styles.card} initiallyExpanded={true}>
         <CardHeader
@@ -50,8 +49,7 @@ class Shelf extends Component {
               {data.map((tile) => (
                 <Book
                   key={tile.img}
-                  bookData={tile} 
-                  categories={categories}
+                  bookData={tile}
                 />
               ))}
             </div>
