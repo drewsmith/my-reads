@@ -32,7 +32,7 @@ class Shelf extends Component {
     title: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired
   }
-
+  
   render() {
     let { title, data } = this.props
     return (

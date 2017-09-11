@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Shelf from './Shelf'
 
-import { getAll, mapBook } from '../utils/BooksAPI'
+import { getAll, mapBook, update } from '../utils/BooksAPI'
 import { CATEGORIES } from '../utils/Constants'
 
 class Bookshelf extends Component {
@@ -10,9 +10,11 @@ class Bookshelf extends Component {
   }
 
   componentWillMount() {
-    getAll().then(response => this.setState({
-      books: response.map(mapBook)
-    }))
+    getAll().then(response => {
+      this.setState({
+        books: response.map(mapBook)
+      })
+    })
   }
 
   render() {

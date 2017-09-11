@@ -108,7 +108,7 @@ class Search extends Component {
       query: query
     })
     search(query, 10).then(searchResults => {
-      let results = searchResults.error ? [] : searchResults
+      let results = (!searchResults || searchResults.error) ? [] : searchResults
       this.setState({
         searchResults: results,
         loading: false
