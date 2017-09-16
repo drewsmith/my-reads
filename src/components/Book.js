@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardText, CardHeader, CardMedia, CardTitle, CardActions } from 'material-ui/Card'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 
 import { blueGrey900 } from 'material-ui/styles/colors'
 
 import { CATEGORIES } from '../utils/Constants'
 import { trimDescription } from '../utils/BooksAPI'
+
+import CategoryDropdown from './CategoryDropdown'
 
 const styles = {
   bookCard: {
@@ -17,7 +17,7 @@ const styles = {
     maxWidth: '250px'
   },
   cardMedia: {
-    maxHeight: '250px', 
+    maxHeight: '250px',
     overflowY: 'hidden'
   },
   descriptionButton: {
@@ -27,27 +27,18 @@ const styles = {
 
 class Book extends Component {
   static PropTypes = {
-    bookData: PropTypes.object.isRequired
+    bookData: PropTypes.object.isRequired,
+    updateBook: PropTypes.func.isRequired
   }
 
   state = {
-    dropDownValue: 1,
     viewDescription: false
   }
 
-  handleChange = (event, index, value) => this.setState({dropDownValue: value})
-
   toggleDescription = (viewDescription) => this.setState({viewDescription})
 
-  componentWillMount() {
-    let { shelf } = this.props.bookData
-    this.setState({
-      dropDownValue: CATEGORIES.map(category => category.shelf).indexOf(shelf) + 1
-    })
-  }
-
   render() {
-    let { bookData } = this.props
+    let { bookData, updateBook } = this.props
     let { dropDownValue, viewDescription } = this.state
 
     return (
@@ -81,18 +72,9 @@ class Book extends Component {
           )}
         </CardText>
         <CardActions>
-          <DropDownMenu 
-            value={dropDownValue} 
-            onChange={this.handleChange}
-          >
-            {CATEGORIES.map((category, index) => (
-              <MenuItem 
-                key={index}
-                value={(index + 1)} 
-                primaryText={category.display} 
-              />
-            ))}
-          </DropDownMenu>
+          <CategoryDropdown
+            book={bookData}
+            updateBook={updateBook} />
         </CardActions>
       </Card>
     )

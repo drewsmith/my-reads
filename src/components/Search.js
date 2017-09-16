@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
+
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import SearchIcon from 'material-ui/svg-icons/action/search'
@@ -8,11 +10,12 @@ import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-backspace
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import AutoComplete from 'material-ui/AutoComplete'
-import CircularProgress from 'material-ui/CircularProgress'
+import Snackbar from 'material-ui/Snackbar'
 
 import { white, blueGrey900 } from 'material-ui/styles/colors'
 
 import Book from './Book'
+import Loading from './Loading'
 
 import { mapBook, search } from '../utils/BooksAPI'
 
@@ -54,12 +57,6 @@ const styles = {
   hint: {
     paddingBottom: '15px'
   },
-  loading: {
-    width: '100%',
-    padding: '40px',
-    margin: '0 auto',
-    textAlign: 'center'
-  },
   noResults: {
     margin: '20px',
     padding: '20px',
@@ -68,12 +65,13 @@ const styles = {
     textAlign: 'center',
     color: blueGrey900,
     fontWeight: '100'
+  },
+  flash: {
+    textAlign: 'center'
   }
 }
 
 const NoResults = () => <Paper style={styles.noResults}>No results found</Paper>
-
-const Loading = () => <div style={styles.loading}><CircularProgress /></div>
 
 const SearchContainer = ({children}) => <div style={styles.searchContainer}>{children}</div>
 
@@ -84,22 +82,45 @@ const BackIcon = () => (
 )
 
 const Nav = () => (
-  <AppBar 
+  <AppBar
     title="Search"
     iconElementLeft={<BackIcon />}
     style={styles.appBar}
   />
 )
 
+const Flash = ({ openFlash, closeFlash, title }) => (
+  <Snackbar
+    open={openFlash}
+    message={`${title ? title : 'Book'} was updated`}
+    autoHideDuration={3000}
+    onRequestClose={closeFlash}
+    style={styles.flash}
+  />
+)
+
+Flash.propTypes = {
+  openFlash: PropTypes.bool.isRequired,
+  closeFlash: PropTypes.func.isRequired,
+  title: PropTypes.string
+}
+
 class Search extends Component {
+  static propTypes = {
+      books: PropTypes.array.isRequired,
+      updateBook: PropTypes.func.isRequired
+  }
+
   state = {
     query: '',
     dataSource: [],
     searchResults: [],
-    loading: false
+    loading: false,
+    openFlash: false,
+    updatedTitle: ""
   }
 
-  handleChange = (value) => this.setState({ value })
+  closeFlash = () => this.setState({openFlash: false, updatedTitle: ""})
 
   onSearch = (query) => {
     this.setState({
@@ -116,11 +137,28 @@ class Search extends Component {
     })
   }
 
+  mapSearchResult = (searchResult) => {
+    let { books } = this.props
+    let book = books.filter(book => book.id === searchResult.id)
+
+    if(book.length === 1) {
+      searchResult.shelf = book[0].shelf
+    }
+
+    return mapBook(searchResult)
+  }
+
+  updateBookWithFlash = (searchResult, ...args) => {
+    this.props.updateBook(...args)
+    this.setState({openFlash: true, updatedTitle: searchResult.title})
+  }
+
   render() {
-    let { query, dataSource, searchResults, loading } = this.state
+    let { query, dataSource, searchResults, loading, openFlash, updatedTitle } = this.state
     return (
       <div>
         <Nav />
+
         <SearchContainer>
           <SearchIcon style={styles.searchIcon} />
           <AutoComplete
@@ -132,22 +170,31 @@ class Search extends Component {
             onNewRequest={this.onSearch}
           />
         </SearchContainer>
+
         {loading === true && (
           <Loading />
         )}
+
         {searchResults.length > 0 && (
           <div style={styles.searchResults}>
             {searchResults.map(searchResult => (
-              <Book 
+              <Book
                 key={searchResult.id}
-                bookData={mapBook(searchResult)}
+                bookData={this.mapSearchResult(searchResult)}
+                updateBook={(...args) => this.updateBookWithFlash(searchResult, ...args)}
               />
             ))}
           </div>
         )}
+
         {searchResults.length === 0 && query.length > 0 && loading === false && (
           <NoResults />
         )}
+
+        <Flash
+          openFlash={openFlash}
+          closeFlash={this.closeFlash}
+          title={updatedTitle} />
       </div>
     )
   }
