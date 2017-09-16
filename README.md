@@ -6,7 +6,7 @@ Demo
 
 A live demo can be located at http://my-reads-drew.herokuapp.com/
 
-(myreads.png)
+![](myreads.png)
 
 Description
 ---
