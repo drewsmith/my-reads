@@ -29,51 +29,32 @@ const styles = {
   }
 }
 
-const ShelfTitle = ({title}) => (
-  <CardHeader
-    title={title}
-    style={styles.cardHeader}
-    actAsExpander={true}
-    showExpandableButton={true}
-  />
-)
-
-ShelfTitle.propTypes = {
-  title: PropTypes.string.isRequired
-}
-
-const ShelfBody = ({books, updateBook}) => (
-  <CardText expandable={true}>
-    <div style={styles.flexWrapper}>
-      <div style={styles.horizontalFlex}>
-        {books.length === 0 && (
-          <Loading />
-        )}
-        {books.length > 0 && (
-          books.map(book => (
-            <Book
-              key={book.img}
-              bookData={book}
-              updateBook={updateBook}
-            />
-          ))
-        )}
-      </div>
-    </div>
-  </CardText>
-)
-
-ShelfBody.propTypes = {
-  books: PropTypes.array.isRequired,
-  updateBook: PropTypes.func.isRequired
-}
-
 const Shelf = ({title, books, updateBook}) => (
   <Card style={styles.card} initiallyExpanded={true}>
-    <ShelfTitle title={title} />
-    <ShelfBody
-      books={books}
-      updateBook={updateBook} />
+    <CardHeader
+      title={title}
+      style={styles.cardHeader}
+      actAsExpander={true}
+      showExpandableButton={true}
+    />
+    <CardText expandable={true}>
+      <div style={styles.flexWrapper}>
+        <div style={styles.horizontalFlex}>
+          {books.length === 0 && (
+            <Loading />
+          )}
+          {books.length > 0 && (
+            books.map(book => (
+              <Book
+                key={book.img}
+                bookData={book}
+                updateBook={updateBook}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </CardText>
   </Card>
 )
 
