@@ -13,4 +13,9 @@ export const READ = {
   display: "Read"
 }
 
-export const CATEGORIES = [CURRENTLY_READING, WANT_TO_READ, READ]
+export const NONE = {
+  shelf: "",
+  display: "None"
+}
+
+export const CATEGORIES = [CURRENTLY_READING, WANT_TO_READ, READ, NONE]

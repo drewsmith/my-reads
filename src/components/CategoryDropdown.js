@@ -4,7 +4,7 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
 const categoryValue = (shelf) => {
-  return shelf ? CATEGORIES.map(category => category.shelf).indexOf(shelf) : -1
+  return CATEGORIES.map(category => category.shelf).indexOf(shelf)
 }
 
 const getShelf = (index) => {

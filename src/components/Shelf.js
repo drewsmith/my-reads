@@ -29,6 +29,8 @@ const styles = {
   }
 }
 
+const NoBooksFound = () => <div><h4>No Books Found</h4></div>
+
 const Shelf = ({title, books, updateBook}) => (
   <Card style={styles.card} initiallyExpanded={true}>
     <CardHeader
@@ -41,7 +43,7 @@ const Shelf = ({title, books, updateBook}) => (
       <div style={styles.flexWrapper}>
         <div style={styles.horizontalFlex}>
           {books.length === 0 ? (
-            <Loading />
+            <NoBooksFound />
           ) : (
             books.map(book => (
               <Book

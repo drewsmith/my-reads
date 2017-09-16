@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Shelf from './Shelf'
-import { CATEGORIES } from '../utils/Constants'
+import { CATEGORIES, NONE } from '../utils/Constants'
 
 const Bookshelf = ({books, updateBook}) => (
   <div>
-    {CATEGORIES.map(category => (
+    {CATEGORIES.filter(category => category.shelf !== NONE.shelf).map(category => (
       <Shelf
         key={category.shelf}
         title={category.display}
