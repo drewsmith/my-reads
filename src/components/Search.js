@@ -4,12 +4,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-backspace'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
-import AutoComplete from 'material-ui/AutoComplete'
 import Snackbar from 'material-ui/Snackbar'
 
 import { white, blueGrey900 } from 'material-ui/styles/colors'
@@ -58,8 +56,8 @@ const styles = {
     paddingBottom: '15px'
   },
   noResults: {
-    margin: '20px',
-    padding: '20px',
+    margin: '20px 30px',
+    padding: '30px',
     fontSize: '16px',
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -113,14 +111,13 @@ class Search extends Component {
 
   state = {
     query: '',
-    dataSource: [],
     searchResults: [],
     loading: false,
     openFlash: false,
-    updatedTitle: ""
+    updatedTitle: ''
   }
 
-  closeFlash = () => this.setState({openFlash: false, updatedTitle: ""})
+  closeFlash = () => this.setState({openFlash: false, updatedTitle: ''})
 
   onSearch = (query) => {
     this.setState({
@@ -154,20 +151,19 @@ class Search extends Component {
   }
 
   render() {
-    let { query, dataSource, searchResults, loading, openFlash, updatedTitle } = this.state
+    let { query, searchResults, loading, openFlash, updatedTitle } = this.state
     return (
       <div>
         <Nav />
 
         <SearchContainer>
           <SearchIcon style={styles.searchIcon} />
-          <AutoComplete
+          <TextField
+            onKeyUp={(e) => this.onSearch(e.target.value)}
             hintText="Book Name"
-            dataSource={dataSource}
             fullWidth={true}
-            textFieldStyle={styles.searchInput}
             hintStyle={styles.hint}
-            onNewRequest={this.onSearch}
+            style={styles.searchInput}
           />
         </SearchContainer>
 

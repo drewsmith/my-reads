@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Card, CardText, CardHeader, CardMedia, CardTitle, CardActions } from 'material-ui/Card'
+import { Card, CardText, CardMedia, CardTitle, CardActions } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
-import { blueGrey900 } from 'material-ui/styles/colors'
-
-import { CATEGORIES } from '../utils/Constants'
 import { trimDescription } from '../utils/BooksAPI'
 
 import CategoryDropdown from './CategoryDropdown'
@@ -39,7 +36,7 @@ class Book extends Component {
 
   render() {
     let { bookData, updateBook } = this.props
-    let { dropDownValue, viewDescription } = this.state
+    let { viewDescription } = this.state
 
     return (
       <Card key={bookData.id} style={styles.bookCard}>

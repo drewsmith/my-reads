@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { CATEGORIES } from '../utils/Constants'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
