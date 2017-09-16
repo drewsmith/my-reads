@@ -1,1 +1,0 @@
-export const ADD_TO_CATEGORY = 'ADD_TO_CATEGORY'
