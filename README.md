@@ -4,12 +4,12 @@ my-reads
 Demo
 ---
 
-A live demo can be located at [http://my-reads-drew.herokuapp.com/]
+A live demo can be located at http://my-reads-drew.herokuapp.com/
 
 Description
 ---
 
-My reads is a simple Single Page Application (SPA) to demonstrate react-fundamentals. The homepage is a list of books categorized into three separate book shelves:
+My reads is a Single Page Application (SPA) to demonstrate react-fundamentals. The homepage is a list of books categorized into three separate book shelves:
 
 1. Currently Reading
 2. Want to Read
