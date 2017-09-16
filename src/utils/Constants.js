@@ -14,7 +14,7 @@ export const READ = {
 }
 
 export const NONE = {
-  shelf: "",
+  shelf: "noShelf",
   display: "None"
 }
 

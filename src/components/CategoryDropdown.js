@@ -1,9 +1,12 @@
 import React from 'react'
-import { CATEGORIES } from '../utils/Constants'
+import { CATEGORIES, NONE } from '../utils/Constants'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
 const categoryValue = (shelf) => {
+  if(!shelf || shelf === '') {
+    shelf = NONE.shelf
+  }
   return CATEGORIES.map(category => category.shelf).indexOf(shelf)
 }
 
