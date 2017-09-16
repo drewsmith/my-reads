@@ -18,7 +18,7 @@ const CategoryDropdown = ({book, updateBook}) => {
   return (
     <DropDownMenu
       value={categoryValue(book.shelf)}
-      onChange={(e, index, value) => updateBook(book.id, getShelf(index))}
+      onChange={(e, index, value) => updateBook(book, getShelf(index))}
     >
       {CATEGORIES.map((category, index) => (
         <MenuItem

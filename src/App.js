@@ -50,8 +50,10 @@ class App extends Component {
     this.getBooks()
   }
 
-  updateBook(id, shelf) {
-    update(id, shelf).then(response => this.getBooks())
+  updateBook(book, shelf) {
+    if(book.shelf !== shelf) {
+      update(book, shelf).then(response => this.getBooks())
+    }
   }
 
   render() {
