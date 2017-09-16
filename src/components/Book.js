@@ -32,7 +32,7 @@ class Book extends Component {
     viewDescription: false
   }
 
-  toggleDescription = (viewDescription) => this.setState({viewDescription})
+  toggleDescription = () => this.setState((state) => ({viewDescription: !state.viewDescription}))
 
   render() {
     let { bookData, updateBook } = this.props
@@ -45,28 +45,15 @@ class Book extends Component {
         </CardMedia>
         <CardTitle title={bookData.title} subtitle={bookData.authors} />
         <CardText>
-          {viewDescription === false && (
-            <div>
-              {trimDescription(bookData.description)}
-              <FlatButton
-                onClick={() => this.toggleDescription(true)}
-                style={styles.descriptionButton}
-                secondary={true}>
-                View Description
-              </FlatButton>
-            </div>
-          )}
-          {viewDescription === true && (
-            <div>
-            {bookData.description}
+          <div>
+            {viewDescription ? bookData.description : trimDescription(bookData.description)}
             <FlatButton
-              onClick={() => this.toggleDescription(false)}
+              onClick={this.toggleDescription}
               style={styles.descriptionButton}
               secondary={true}>
-              Hide Description
+              {`${viewDescription ? "Hide" : "View"} Description`}
             </FlatButton>
           </div>
-          )}
         </CardText>
         <CardActions>
           <CategoryDropdown

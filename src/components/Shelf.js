@@ -40,10 +40,9 @@ const Shelf = ({title, books, updateBook}) => (
     <CardText expandable={true}>
       <div style={styles.flexWrapper}>
         <div style={styles.horizontalFlex}>
-          {books.length === 0 && (
+          {books.length === 0 ? (
             <Loading />
-          )}
-          {books.length > 0 && (
+          ) : (
             books.map(book => (
               <Book
                 key={book.img}
